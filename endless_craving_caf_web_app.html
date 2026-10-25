@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endless Craving Cafe | Official Online Ordering & Menu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- FontAwesome for Facebook Messenger icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdfbf7',
+                            100: '#f6ede0',
+                            200: '#e9d7c1',
+                            300: '#d7bc9a',
+                            600: '#b45309',
+                            700: '#8c3d07',
+                            800: '#4a2310',
+                            900: '#2c1810',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #FAF6F0;
+        color: #3D2B1F;
+      }
+      .font-script {
+        font-family: 'Great Vibes', cursive;
+      }
+      .font-serif-brand {
+        font-family: 'Cinzel', serif;
+      }
+      /* Custom Scrollbar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f6ede0;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #d7bc9a;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col pb-24 md:pb-12 selection:bg-[#805D3B] selection:text-white relative">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[60] flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-[#FAF6F0]/95 backdrop-blur-md border-b border-[#E8DACB]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Logo Section -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-14 h-14 rounded-full shadow-md group-hover:scale-105 transition-transform duration-300">
+            <svg viewBox="0 0 400 400" class="w-full h-full drop-shadow-sm" aria-label="Endless Craving Café Logo">
+              <defs>
+                <path id="textArcTop" d="M 62 200 A 138 138 0 0 1 338 200" fill="none"/>
+              </defs>
+              <!-- Outer Dark Ring -->
+              <circle cx="200" cy="200" r="192" fill="#805D3B"/>
+              <!-- Inner Cream Ring -->
+              <circle cx="200" cy="200" r="172" fill="#F8EFE4"/>
+              <!-- Main Inner Dark Circle -->
+              <circle cx="200" cy="200" r="138" fill="#805D3B"/>
+              
+              <!-- Curved Top Text -->
+              <text font-family="'Cinzel', serif" font-size="20" font-weight="600" fill="#805D3B" letter-spacing="3.5">
+                <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">
+                  A TASTE YOU CAN'T RESIST
+                </textPath>
+              </text>
+              
+              <!-- Side Stars -->
+              <path d="M 45 200 L 48 191 L 57 191 L 50 196 L 52 205 L 45 200 L 38 205 L 40 196 L 33 191 L 42 191 Z" fill="#805D3B"/>
+              <path d="M 355 200 L 358 191 L 367 191 L 360 196 L 362 205 L 355 200 L 348 205 L 350 196 L 343 191 L 352 191 Z" fill="#805D3B"/>
+
+              <!-- Central Character Illustration -->
+              <!-- Chef Hat -->
+              <path d="M 155 160 C 145 130, 150 75, 195 73 C 210 70, 245 75, 240 105 C 255 105, 268 120, 260 145 C 252 165, 230 170, 215 170 L 160 170 Z" fill="#FFFFFF" stroke="#4A3423" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M 160 162 C 170 125, 180 90, 205 85" fill="none" stroke="#664D36" stroke-width="1.2" opacity="0.4" stroke-dasharray="2 2"/>
+              <path d="M 185 165 C 195 130, 215 95, 230 92" fill="none" stroke="#664D36" stroke-width="1.2" opacity="0.4" stroke-dasharray="2 2"/>
+              <!-- Hat Band -->
+              <path d="M 152 165 L 222 165 L 217 185 L 157 185 Z" fill="#FFFFFF" stroke="#4A3423" stroke-width="2.5"/>
+
+              <!-- Face Base -->
+              <path d="M 160 175 C 150 185, 150 215, 175 235 C 190 247, 210 247, 222 232 C 235 215, 235 185, 225 175 Z" fill="#EFCAB0" stroke="#4A3423" stroke-width="2"/>
+              <!-- Hair -->
+              <path d="M 172 170 C 160 185, 155 225, 165 245 C 168 230, 172 200, 185 180 Z" fill="#5A2E19" stroke="#331A0E" stroke-width="1.5"/>
+              <path d="M 185 170 C 185 195, 192 235, 198 250 C 200 230, 195 195, 192 170 Z" fill="#422010" stroke="#331A0E" stroke-width="1.5"/>
+              <path d="M 205 170 C 215 185, 230 220, 240 235 C 232 215, 225 190, 212 170 Z" fill="#5A2E19" stroke="#331A0E" stroke-width="1.5"/>
+
+              <!-- Left Icon: Whisk -->
+              <g transform="translate(108, 198) rotate(-35)">
+                <ellipse cx="20" cy="12" rx="14" ry="22" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+                <path d="M 20 -10 L 20 34" stroke="#FFFFFF" stroke-width="2.5"/>
+                <path d="M 10 0 C 16 15, 24 15, 30 0" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+                <path d="M 20 34 L 20 58" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="20" cy="62" r="3" fill="#FFFFFF"/>
+              </g>
+
+              <!-- Right Icon: Fork -->
+              <g transform="translate(262, 198) rotate(35)">
+                <path d="M 10 0 L 10 18 C 10 25, 30 25, 30 18 L 30 0 M 16 0 L 16 16 M 24 0 L 24 16 M 20 23 L 20 58" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+
+              <!-- Main Typography -->
+              <text x="200" y="278" font-family="'Great Vibes', cursive" font-size="44" fill="#FFFFFF" text-anchor="middle">Endless</text>
+              <text x="200" y="324" font-family="'Cinzel', serif" font-weight="700" font-size="42" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">CRAVING</text>
+              <text x="200" y="352" font-family="'Inter', sans-serif" font-weight="300" font-size="20" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">Café</text>
+            </svg>
+          </div>
+          <div>
+            <span class="block font-serif-brand text-lg font-bold tracking-wider text-[#4A3423] leading-none">ENDLESS CRAVING</span>
+            <span class="text-xs font-medium text-[#805D3B] tracking-widest uppercase">Café • Est. 2020</span>
+          </div>
+        </a>
+
+        <!-- Right Header Actions -->
+        <div class="flex items-center gap-3">
+          <button onclick="toggleCart(true)" class="relative p-2.5 rounded-full bg-brand-100 hover:bg-brand-200 text-brand-900 transition-colors flex items-center gap-2 px-4 border border-brand-200">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-[#805D3B]"></i>
+            <span class="hidden sm:inline text-xs font-bold text-brand-900">Order Ticket</span>
+            <span id="cart-badge-count" class="bg-amber-600 text-white font-bold text-xs px-2 py-0.5 rounded-full">0</span>
+          </button>
+
+          <!-- Messenger Link -->
+          <a href="https://www.facebook.com/share/1Dz853TNXk/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#805D3B] text-white hover:bg-[#5C4026] transition-colors text-xs sm:text-sm font-semibold shadow-sm">
+            <i class="fab fa-facebook-messenger text-base"></i>
+            <span class="hidden sm:inline">Message Us</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="bg-[#F8EFE4] border-b border-[#E8DACB] py-10 px-4">
+      <div class="max-w-4xl mx-auto text-center space-y-3">
+        <span class="inline-block px-3 py-1 rounded-full bg-[#805D3B]/10 text-[#805D3B] text-xs font-semibold tracking-widest uppercase">
+          A Taste You Can't Resist
+        </span>
+        <h1 class="font-serif-brand text-3xl sm:text-5xl font-extrabold text-[#3D2B1F] tracking-tight">
+          Endless Craving Café
+        </h1>
+        <p class="text-sm sm:text-base text-[#6B5340] max-w-xl mx-auto">
+          Handcrafted pasta, crispy wings, signature iced lattes, and premium espresso brewed with passion since 2020.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTION -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full" id="menu-section">
+        
+        <!-- SEARCH & CATEGORY BAR -->
+        <div class="space-y-6 mb-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-brand-900">Our Official Menu</h2>
+                    <p class="text-brand-600 text-sm">Select items to add to your order ticket</p>
+                </div>
+                <!-- Search Input -->
+                <div class="relative w-full md:w-80">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-600"></i>
+                    <input type="text" id="menu-search" oninput="filterMenu()" placeholder="Search wings, coffee, pasta..." class="w-full bg-white border border-brand-200 rounded-full pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-sm transition-all">
+                </div>
+            </div>
+
+            <!-- Category Filter Buttons -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="category-buttons-container">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+
+        <!-- MENU GRID -->
+        <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated via JS -->
+        </div>
+
+    </main>
+
+    <!-- CAFE INFORMATION & LOCATION SECTION -->
+    <section id="about-section" class="bg-brand-100 border-t border-brand-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 font-serif font-bold text-lg text-brand-900">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-amber-600"></i>
+                    Visit Our Store
+                </div>
+                <p class="text-sm text-brand-800 leading-relaxed">
+                    <strong>Endless Craving Cafe</strong><br>
+                    Barangay Suclayin, Baler, Aurora, Philippines 3200
+                </p>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 font-serif font-bold text-lg text-brand-900">
+                    <i data-lucide="clock" class="w-5 h-5 text-amber-600"></i>
+                    Cafe Hours
+                </div>
+                <p class="text-sm text-brand-800 leading-relaxed">
+                    Open Daily: 10:00 AM – 9:00 PM<br>
+                    Dine-In • Take-Out • Delivery
+                </p>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 font-serif font-bold text-lg text-brand-900">
+                    <i data-lucide="message-square" class="w-5 h-5 text-amber-600"></i>
+                    Connect With Us
+                </div>
+                <p class="text-sm text-brand-800 leading-relaxed">
+                    Direct Facebook Messenger ordering enabled.<br>
+                    <a href="https://www.facebook.com/share/1Dz853TNXk/" target="_blank" rel="noopener noreferrer" class="text-amber-700 font-semibold underline hover:text-amber-800">
+                        Visit Facebook Page
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-900 text-brand-300 py-6 border-t border-brand-800 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© <span id="year"></span> Endless Craving Cafe (Endless Cravings Corner) - Baler, Aurora. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SLIDE-OVER CART & ORDER DRAWER -->
+    <div id="cart-drawer-overlay" class="fixed inset-0 bg-brand-900/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300 opacity-0" onclick="toggleCart(false)"></div>
+    
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-full flex pl-10 z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+            
+            <!-- Cart Header -->
+            <div class="p-5 bg-brand-900 text-white flex items-center justify-between border-b border-brand-800">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-amber-500"></i>
+                    <h3 class="font-serif font-bold text-lg text-white">Your Order Ticket</h3>
+                </div>
+                <button onclick="toggleCart(false)" class="p-1 rounded-lg text-brand-300 hover:text-white hover:bg-brand-800 transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Cart Body Container -->
+            <div class="flex-1 overflow-y-auto p-5 space-y-6 custom-scrollbar">
+                
+                <!-- 1. ORDER FULFILLMENT TYPE SELECTOR -->
+                <div class="bg-brand-50 border border-brand-200 rounded-2xl p-4 space-y-4">
+                    <label class="block text-xs font-bold text-brand-900 uppercase tracking-wider">
+                        1. Select Order Type <span class="text-red-500">*</span>
+                    </label>
+                    
+                    <div class="grid grid-cols-3 gap-2 p-1 bg-brand-100 rounded-xl">
+                        <button type="button" onclick="setOrderType('dine-in')" id="btn-dine-in" class="py-2 text-xs font-bold rounded-lg transition-all text-center flex flex-col items-center justify-center gap-1">
+                            <i data-lucide="utensils" class="w-4 h-4"></i>
+                            Dine-In
+                        </button>
+                        <button type="button" onclick="setOrderType('take-out')" id="btn-take-out" class="py-2 text-xs font-bold rounded-lg transition-all text-center flex flex-col items-center justify-center gap-1">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                            Take-Out
+                        </button>
+                        <button type="button" onclick="setOrderType('delivery')" id="btn-delivery" class="py-2 text-xs font-bold rounded-lg transition-all text-center flex flex-col items-center justify-center gap-1">
+                            <i data-lucide="truck" class="w-4 h-4"></i>
+                            Delivery
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Input Fields based on Fulfillment Selection -->
+                    <div id="fulfillment-inputs" class="space-y-3 pt-2">
+                        <!-- Fields populated via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- 2. CART ITEMS LIST -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between border-b border-brand-100 pb-2">
+                        <span class="text-xs font-bold text-brand-900 uppercase tracking-wider">2. Selected Menu Items</span>
+                        <button onclick="clearCart()" class="text-xs text-red-600 hover:underline font-medium">Clear All</button>
+                    </div>
+                    
+                    <div id="cart-items-container" class="space-y-3">
+                        <!-- Cart items populated via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Cart Footer Summary & Checkout Button -->
+            <div class="p-5 bg-brand-50 border-t border-brand-200 space-y-4">
+                <div class="space-y-1.5">
+                    <div class="flex justify-between text-xs text-brand-700">
+                        <span>Items Count:</span>
+                        <span id="cart-summary-count" class="font-bold text-brand-900">0 items</span>
+                    </div>
+                    <div class="flex justify-between text-base font-bold text-brand-900 border-t border-brand-200 pt-2">
+                        <span>Total Amount:</span>
+                        <span id="cart-total-price" class="text-amber-700">₱0.00</span>
+                    </div>
+                </div>
+
+                <button onclick="processCheckout()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm active:scale-98">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    Submit Order to Messenger
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MESSENGER PREVIEW & CONFIRMATION MODAL -->
+    <div id="messenger-modal" class="fixed inset-0 bg-brand-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-brand-200 flex flex-col max-h-[90vh]">
+            <div class="bg-brand-900 p-5 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-500">
+                        <i data-lucide="message-square" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-white">Order Summary Ready</h3>
+                        <p class="text-xs text-brand-300">Order details copied to clipboard!</p>
+                    </div>
+                </div>
+                <button onclick="closeMessengerModal()" class="text-brand-300 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-4 flex-1">
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-start gap-3 text-xs text-emerald-800">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong>Order Ticket Copied!</strong> Simply paste (Ctrl+V or Long Press Paste) into the Messenger chat window that opens.
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-brand-900 uppercase">Pre-Filled Ticket Text Preview:</label>
+                    <textarea id="modal-order-text" readonly class="w-full h-44 p-3 bg-brand-50 border border-brand-200 rounded-xl font-mono text-xs text-brand-900 focus:outline-none resize-none custom-scrollbar"></textarea>
+                </div>
+            </div>
+
+            <div class="p-5 bg-brand-50 border-t border-brand-200 flex flex-col sm:flex-row gap-3">
+                <button onclick="copyOrderTextOnly()" class="flex-1 bg-brand-200 hover:bg-brand-300 text-brand-900 py-3 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    Copy Again
+                </button>
+                <a id="open-fb-messenger-link" href="https://www.facebook.com/share/1Dz853TNXk/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 text-center shadow-md">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    Open Messenger Chat
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING MOBILE CART BUTTON -->
+    <div class="fixed bottom-6 right-6 z-30 md:hidden">
+        <button onclick="toggleCart(true)" class="bg-amber-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center relative active:scale-90 transition-transform">
+            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            <span id="floating-cart-badge" class="absolute -top-1 -right-1 bg-brand-900 text-amber-500 font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-white">0</span>
+        </button>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // --- 1. FULL MENU DATA ---
+        const MENU_ITEMS = [
+            // PASTA & WINGS
+            { id: 'pw-1', category: 'Pasta & Wings', name: 'Buffalo Wings', price: 190, description: 'Coated with a spicy sauce and served with garlic dipping sauce.' },
+            { id: 'pw-2', category: 'Pasta & Wings', name: 'Buttered Curry', price: 190, description: 'Coated with a twist of sweet and spicy flavorful sauce.' },
+            { id: 'pw-3', category: 'Pasta & Wings', name: 'Garlic Parmesan', price: 190, description: 'Tossed with olive oil, butter, minced garlic generous shower of parmesan cheese.' },
+            { id: 'pw-4', category: 'Pasta & Wings', name: 'Tuna Pesto', price: 165, description: 'Delicious combination of tuna in creamy pesto sauce tossed with penne pasta.' },
+            { id: 'pw-5', category: 'Pasta & Wings', name: 'Chicken Alfredo', price: 175, description: 'Rich & creamy sauce in linguine pasta with chicken breast and parmesan cheese.' },
+            { id: 'pw-6', category: 'Pasta & Wings', name: 'Creamy Ham Carbonara', price: 175, description: 'Creamy & cheesy flavorful sauce in linguine pasta mixed with mushroom and dices of ham.' },
+
+            // SIGNATURE COFFEE
+            { id: 'sc-1', category: 'Signature Coffee', name: 'Creamy Spanish Latte', price: 130, description: 'Rich espresso with condensed milk and creamy textured milk.' },
+            { id: 'sc-2', category: 'Signature Coffee', name: 'Sea Salt Latte', price: 135, description: 'Signature espresso topped with smooth salted cream cold foam.' },
+            { id: 'sc-3', category: 'Signature Coffee', name: 'Vanilla Cloud Latte', price: 140, description: 'Smooth espresso with sweet vanilla cloud foam layer.' },
+            { id: 'sc-4', category: 'Signature Coffee', name: 'Caramel Oat Latte', price: 145, description: 'Espresso infused with rich caramel and Oatside oat milk.' },
+
+            // ESPRESSO
+            { id: 'esp-1', category: 'Espresso', name: 'Americano', price: 95, description: 'Classic bold espresso shot diluted with hot or cold filtered water.' },
+            { id: 'esp-2', category: 'Espresso', name: 'Latte', price: 110, description: 'Espresso with rich steamed milk and a thin layer of microfoam.' },
+            { id: 'esp-3', category: 'Espresso', name: 'Cappuccino', price: 110, description: 'Equal parts espresso, steamed milk, and airy deep foam layer.' },
+            { id: 'esp-4', category: 'Espresso', name: 'White Chocolate Mocha', price: 130, description: 'Espresso combined with sweet white chocolate sauce and milk.' },
+            { id: 'esp-5', category: 'Espresso', name: 'Caramel Macchiato', price: 135, description: 'Vanilla-flavored milk marked with espresso and buttery caramel drizzle.' },
+            { id: 'esp-6', category: 'Espresso', name: 'Hazelnut Mocha Macchiato', price: 140, description: 'Rich espresso drizzled with hazelnut syrup and cocoa chocolate.' },
+
+            // NON COFFEE
+            { id: 'nc-1', category: 'Non Coffee', name: 'Red Lime', price: 110, description: 'Refreshing tart red citrus tea infusion.' },
+            { id: 'nc-2', category: 'Non Coffee', name: 'Endless Signature Chocolate', price: 125, description: 'Decadent dark chocolate blend served creamy and smooth.' },
+            { id: 'nc-3', category: 'Non Coffee', name: 'Iced Milky Caramel', price: 115, description: 'Sweet buttery caramel blended with fresh milk over ice.' },
+            { id: 'nc-4', category: 'Non Coffee', name: 'Strawberry Milk', price: 120, description: 'Fresh strawberry sauce mixed with sweet silky milk.' },
+            { id: 'nc-5', category: 'Non Coffee', name: 'Sweet Pink Milk Cocoa', price: 125, description: 'Velvety pink cocoa milk drink with a creamy finish.' },
+
+            // EXTRAS
+            { id: 'ext-1', category: 'Extras', name: 'Espresso Shot', price: 35, description: 'Add an extra shot of dark roasted espresso.' },
+            { id: 'ext-2', category: 'Extras', name: 'Syrup', price: 25, description: 'Add extra vanilla, caramel, or hazelnut syrup.' },
+            { id: 'ext-3', category: 'Extras', name: 'Oatside Oat Milk', price: 40, description: 'Substitute standard milk with plant-based Oatside oat milk.' }
+        ];
+
+        // --- 2. STATE MANAGEMENT ---
+        let currentCategory = 'All';
+        let cart = [];
+        let orderType = 'take-out';
+        let claimNumberTaken = false;
+
+        const TAKEN_NUMBERS_KEY = 'endless_craving_taken_claim_numbers';
+        function getTakenNumbers() {
+            const data = localStorage.getItem(TAKEN_NUMBERS_KEY);
+            return data ? JSON.parse(data) : ['101', '102', '105'];
+        }
+        function saveTakenNumber(num) {
+            const numbers = getTakenNumbers();
+            if (!numbers.includes(num.trim())) {
+                numbers.push(num.trim());
+                localStorage.setItem(TAKEN_NUMBERS_KEY, JSON.stringify(numbers));
+            }
+        }
+
+        // --- 3. INITIALIZATION ---
+        window.onload = function() {
+            const yearElem = document.getElementById('year');
+            if (yearElem) yearElem.textContent = new Date().getFullYear();
+            
+            renderCategoryButtons();
+            renderMenu();
+            setOrderType('take-out');
+            updateCartUI();
+            if (window.lucide) lucide.createIcons();
+        };
+
+        // --- 4. RENDER CATEGORY BUTTONS & MENU ---
+        function renderCategoryButtons() {
+            const categories = ['All', ...new Set(MENU_ITEMS.map(item => item.category))];
+            const container = document.getElementById('category-buttons-container');
+            if (!container) return;
+            
+            container.innerHTML = categories.map(cat => {
+                const isActive = cat === currentCategory;
+                return `
+                    <button onclick="selectCategory('${cat}')" 
+                        class="px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+                            isActive 
+                            ? 'bg-amber-600 text-white shadow-md' 
+                            : 'bg-white text-brand-800 border border-brand-200 hover:bg-brand-100'
+                        }">
+                        ${cat}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectCategory(category) {
+            currentCategory = category;
+            renderCategoryButtons();
+            renderMenu();
+        }
+
+        function filterMenu() {
+            renderMenu();
+        }
+
+        function renderMenu() {
+            const grid = document.getElementById('menu-grid');
+            if (!grid) return;
+            const searchInput = document.getElementById('menu-search');
+            const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+            const filtered = MENU_ITEMS.filter(item => {
+                const matchesCategory = currentCategory === 'All' || item.category === currentCategory;
+                const matchesSearch = item.name.toLowerCase().includes(searchQuery) || 
+                                      item.description.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-2xl border border-brand-200 p-8">
+                        <i data-lucide="coffee-off" class="w-12 h-12 text-brand-300 mx-auto mb-3"></i>
+                        <p class="text-brand-800 font-semibold">No menu items found</p>
+                        <p class="text-xs text-brand-600 mt-1">Try searching for something else or switch categories.</p>
+                    </div>
+                `;
+                if (window.lucide) lucide.createIcons();
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => `
+                <div class="bg-white rounded-2xl border border-brand-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                    <div class="space-y-2">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-brand-100 text-brand-800 rounded-full">
+                                ${item.category}
+                            </span>
+                            <span class="font-bold text-lg text-amber-700 font-sans">₱${item.price.toFixed(2)}</span>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-brand-900 group-hover:text-amber-700 transition-colors">
+                            ${item.name}
+                        </h3>
+                        <p class="text-xs text-brand-600 leading-relaxed font-normal">
+                            ${item.description}
+                        </p>
+                    </div>
+
+                    <div class="pt-4 mt-4 border-t border-brand-100 flex items-center justify-between">
+                        <button onclick="addToCart('${item.id}')" class="w-full bg-brand-900 hover:bg-amber-600 text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 active:scale-95 shadow">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        // --- 5. CART LOGIC ---
+        function addToCart(itemId) {
+            const item = MENU_ITEMS.find(i => i.id === itemId);
+            if (!item) return;
+
+            const existing = cart.find(i => i.id === itemId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...item, quantity: 1, note: '' });
+            }
+
+            updateCartUI();
+            showToast(`Added ${item.name} to order ticket!`);
+        }
+
+        function updateQuantity(itemId, delta) {
+            const index = cart.findIndex(i => i.id === itemId);
+            if (index !== -1) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateItemNote(itemId, note) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.note = note;
+            }
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            cart = [];
+            updateCartUI();
+            showToast('Cart cleared');
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            const badgeCount = document.getElementById('cart-badge-count');
+            const floatBadge = document.getElementById('floating-cart-badge');
+            const summaryCount = document.getElementById('cart-summary-count');
+            const totalDisplay = document.getElementById('cart-total-price');
+
+            if (badgeCount) badgeCount.textContent = totalItems;
+            if (floatBadge) floatBadge.textContent = totalItems;
+            if (summaryCount) summaryCount.textContent = `${totalItems} ${totalItems === 1 ? 'item' : 'items'}`;
+            if (totalDisplay) totalDisplay.textContent = `₱${totalPrice.toFixed(2)}`;
+
+            const container = document.getElementById('cart-items-container');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 text-brand-600">
+                        <i data-lucide="shopping-bag" class="w-10 h-10 mx-auto text-brand-300 mb-2"></i>
+                        <p class="text-xs font-semibold">Your ticket is empty</p>
+                        <p class="text-[11px] text-brand-600">Select drinks or meals from the menu to start</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="bg-brand-50 border border-brand-200 rounded-xl p-3 space-y-2">
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-xs text-brand-900">${item.name}</h4>
+                                <span class="text-[11px] text-amber-700 font-semibold">₱${(item.price * item.quantity).toFixed(2)}</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 bg-white border border-brand-200 rounded-lg p-1">
+                                <button onclick="updateQuantity('${item.id}', -1)" class="w-5 h-5 flex items-center justify-center text-brand-700 hover:bg-brand-100 rounded text-xs font-bold">-</button>
+                                <span class="text-xs font-bold px-1 text-brand-900">${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.id}', 1)" class="w-5 h-5 flex items-center justify-center text-brand-700 hover:bg-brand-100 rounded text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <input type="text" 
+                            placeholder="Custom notes (e.g., Less ice, no sugar)" 
+                            value="${item.note || ''}" 
+                            onchange="updateItemNote('${item.id}', this.value)"
+                            class="w-full bg-white border border-brand-200 rounded-md px-2 py-1 text-[11px] text-brand-800 focus:outline-none focus:ring-1 focus:ring-amber-500">
+                    </div>
+                `).join('');
+            }
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        // --- 6. FULFILLMENT TYPE HANDLER & VALIDATION ---
+        function setOrderType(type) {
+            orderType = type;
+            const btnDine = document.getElementById('btn-dine-in');
+            const btnTake = document.getElementById('btn-take-out');
+            const btnDel = document.getElementById('btn-delivery');
+            const inputsContainer = document.getElementById('fulfillment-inputs');
+
+            if (!inputsContainer) return;
+
+            [btnDine, btnTake, btnDel].forEach(btn => {
+                if (btn) btn.className = "py-2 text-xs font-bold rounded-lg transition-all text-center flex flex-col items-center justify-center gap-1 bg-white text-brand-800 border border-brand-200";
+            });
+
+            if (type === 'dine-in') {
+                if (btnDine) btnDine.className = "py-2 text-xs font-bold rounded-lg transition-all text-center flex flex-col items-center justify-center gap-1 bg-amber-600 text-white shadow-md";
+                inputsContainer.innerHTML = `
+                    <div class="space-y-2">
+                        <div>
+                            <label class="block text-[11px] font-bold text-brand-800">Customer Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="dine-name" placeholder="Enter your name" class="w-full bg-white border border-brand-200 rounded-lg px-3 py-2 text-xs text-brand-900 focus:outline-none focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-brand-800">Table Number <span class="text-red-500">*</span></label>
+                            <input type="text" id="dine-table" placeholder="e.g. Table 04" class="w-full bg-white border border-brand-200 rounded-lg px-3 py-2 text-xs text-brand-900 focus:outline-none focus:ring-1 focus:ring-amber-500">
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'take-out') {
+                if (btnTake) btnTake.className = "py-2 text-xs font-bold rounded-lg transition-all text-center flex flex-col items-center justify-center gap-1 bg-amber-600 text-white shadow-md";
+                inputsContainer.innerHTML = `
+                    <div class="space-y-2">
+                        <div>
+                            <label class="block text-[11px] font-bold text-brand-800">Customer Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="takeout-name" placeholder="Enter your full name" class="w-full bg-white border border-brand-200 rounded-lg px-3 py-2 text-xs text-brand-900 focus:outline-none focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-brand-800">Preferred Claiming Stub # <span class="text-red-500">*</span></label>
+                            <input type="text" id="takeout-claim-num" oninput="validateClaimNumber()" placeholder="e.g. 103" class="w-full bg-white border border-brand-200 rounded-lg px-3 py-2 text-xs text-brand-900 focus:outline-none focus:ring-1 focus:ring-amber-500">
+                            <p id="claim-num-status" class="text-[10px] mt-1 hidden"></p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'delivery') {
+                if (btnDel) btnDel.className = "py-2 text-xs font-bold rounded-lg transition-all text-center flex flex-col items-center justify-center gap-1 bg-amber-600 text-white shadow-md";
+                inputsContainer.innerHTML = `
+                    <div class="space-y-2">
+                        <div>
+                            <label class="block text-[11px] font-bold text-brand-800">Full Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="del-name" placeholder="Enter full name" class="w-full bg-white border border-brand-200 rounded-lg px-3 py-2 text-xs text-brand-900 focus:outline-none focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-brand-800">Contact Number <span class="text-red-500">*</span></label>
+                            <input type="tel" id="del-phone" placeholder="09XX XXX XXXX" class="w-full bg-white border border-brand-200 rounded-lg px-3 py-2 text-xs text-brand-900 focus:outline-none focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-brand-800">Complete Delivery Address <span class="text-red-500">*</span></label>
+                            <textarea id="del-address" placeholder="Street, Barangay, Landmarks in Baler" class="w-full bg-white border border-brand-200 rounded-lg px-3 py-2 text-xs text-brand-900 focus:outline-none focus:ring-1 focus:ring-amber-500 h-16 resize-none custom-scrollbar"></textarea>
+                        </div>
+                    </div>
+                `;
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function validateClaimNumber() {
+            const input = document.getElementById('takeout-claim-num');
+            const status = document.getElementById('claim-num-status');
+            if (!input || !status) return;
+
+            const val = input.value.trim();
+            const takenList = getTakenNumbers();
+
+            if (!val) {
+                status.classList.add('hidden');
+                claimNumberTaken = false;
+                return;
+            }
+
+            if (takenList.includes(val)) {
+                status.textContent = '❌ This claim stub number is already taken! Please pick another number.';
+                status.className = 'text-[11px] font-bold text-red-600 mt-1 block';
+                claimNumberTaken = true;
+            } else {
+                status.textContent = '✓ Claim stub number available!';
+                status.className = 'text-[11px] font-bold text-emerald-600 mt-1 block';
+                claimNumberTaken = false;
+            }
+        }
+
+        // --- 7. CHECKOUT & MESSENGER HANDOFF ---
+        function processCheckout() {
+            if (cart.length === 0) {
+                showToast('Please add items to your ticket first!', 'error');
+                return;
+            }
+
+            let customerDetailsText = '';
+            let claimNumToSave = null;
+
+            if (orderType === 'dine-in') {
+                const name = document.getElementById('dine-name')?.value.trim();
+                const table = document.getElementById('dine-table')?.value.trim();
+
+                if (!name || !table) {
+                    showToast('Please enter your Name and Table Number for Dine-In.', 'error');
+                    return;
+                }
+                customerDetailsText = `📍 ORDER TYPE: DINE-IN\n👤 Customer Name: ${name}\n🪑 Table Number: ${table}`;
+
+            } else if (orderType === 'take-out') {
+                const name = document.getElementById('takeout-name')?.value.trim();
+                const claimNum = document.getElementById('takeout-claim-num')?.value.trim();
+
+                if (!name) {
+                    showToast('Please enter your Full Name for Take-Out.', 'error');
+                    return;
+                }
+
+                if (!claimNum) {
+                    showToast('Please enter a Claiming Stub Number for Take-Out.', 'error');
+                    return;
+                }
+
+                if (claimNumberTaken) {
+                    showToast('The claiming number you picked is already taken. Choose another number.', 'error');
+                    return;
+                }
+
+                claimNumToSave = claimNum;
+                customerDetailsText = `🛍️ ORDER TYPE: TAKE-OUT\n👤 Customer Name: ${name}\n🎟️ Claim Stub #: ${claimNum}`;
+
+            } else if (orderType === 'delivery') {
+                const name = document.getElementById('del-name')?.value.trim();
+                const phone = document.getElementById('del-phone')?.value.trim();
+                const address = document.getElementById('del-address')?.value.trim();
+
+                if (!name || !phone || !address) {
+                    showToast('Please complete all Delivery details (Name, Phone, Address).', 'error');
+                    return;
+                }
+                customerDetailsText = `🛵 ORDER TYPE: DELIVERY\n👤 Name: ${name}\n📞 Phone: ${phone}\n🏠 Address: ${address}`;
+            }
+
+            const itemsText = cart.map(item => {
+                let text = `• ${item.quantity}x ${item.name} - ₱${(item.price * item.quantity).toFixed(2)}`;
+                if (item.note && item.note.trim()) {
+                    text += `\n  (Note: ${item.note.trim()})`;
+                }
+                return text;
+            }).join('\n');
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            const fullOrderTicket = 
+`☕ ENDLESS CRAVING CAFE ORDER TICKET
+-------------------------------------
+${customerDetailsText}
+
+📋 ORDER ITEMS:
+${itemsText}
+
+-------------------------------------
+💰 TOTAL AMOUNT: ₱${totalPrice.toFixed(2)}
+-------------------------------------
+Thank you for ordering at Endless Craving Cafe!`;
+
+            if (claimNumToSave) {
+                saveTakenNumber(claimNumToSave);
+            }
+
+            copyTextToClipboard(fullOrderTicket);
+
+            const modalText = document.getElementById('modal-order-text');
+            const messengerModal = document.getElementById('messenger-modal');
+
+            if (modalText) modalText.value = fullOrderTicket;
+            if (messengerModal) messengerModal.classList.remove('hidden');
+
+            showToast('Order formatted & copied to clipboard!');
+        }
+
+        function copyTextToClipboard(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {}
+            document.body.removeChild(textArea);
+        }
+
+        function copyOrderTextOnly() {
+            const textElem = document.getElementById('modal-order-text');
+            if (textElem) {
+                copyTextToClipboard(textElem.value);
+                showToast('Order details copied to clipboard!');
+            }
+        }
+
+        function closeMessengerModal() {
+            const messengerModal = document.getElementById('messenger-modal');
+            if (messengerModal) messengerModal.classList.add('hidden');
+        }
+
+        // --- 8. UI HELPERS ---
+        function toggleCart(open) {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-drawer-overlay');
+
+            if (!drawer || !overlay) return;
+
+            if (open) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            const bgColor = type === 'error' ? 'bg-red-600' : 'bg-brand-900';
+            
+            toast.className = `${bgColor} text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transition-all transform translate-y-2 opacity-0 pointer-events-auto border border-amber-500/30`;
+            toast.innerHTML = `
+                <i data-lucide="${type === 'error' ? 'alert-circle' : 'check-circle'}" class="w-4 h-4 text-amber-500"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+            if (window.lucide) lucide.createIcons();
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
